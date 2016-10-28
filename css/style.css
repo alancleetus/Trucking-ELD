@@ -1,0 +1,156 @@
+
+
+html, body
+{
+	padding-top:2%;
+	height: 100%;
+	width: 100%;
+	font-size:14px;
+	min-width:550px;
+	color:white;	
+	font-family: 'Quicksand', sans-serif;
+	font-weight:bold;
+}
+body{
+background-image:url(./bg.png);
+}
+#main-container{
+	background-color:rgba(0,0,0,.8);
+	padding-top:20px;
+	padding-bottom:10px;
+	max-width:950px;
+	margin:auto;
+}
+ button{
+	width:100%;
+	height:100%;
+	padding:auto;
+	margin:5px;
+	background-color:black;
+	border: solid 3px rgba(0,0,0,.2);
+	border-radius: 5px;
+	
+	text-transform:capitalize;
+ }
+.status-button
+{
+	width:100%;
+	height:100%;
+	color: white;
+	background-color:black;
+	font-size: 2em;
+	margin:none;
+}
+
+.status-on-duty
+{
+	background-color:#acd0c0;
+
+}
+.status-off-duty
+{
+	background-color:#f62a00;
+
+}
+.status-driving
+{
+	background-color:#8eba43;
+}
+.status-sleep
+{
+	background-color:#5ea8cc;
+}
+.graph-container
+{
+	text-align:center;
+	margin:10px;
+}
+
+.block-off-duty
+{
+	padding-top:3px;
+	padding-bottom:3px;
+	background-color:#f62a00;
+	float:left;
+	
+}
+
+.block-on-duty
+{
+	padding-top:3px;
+	padding-bottom:3px;
+	background-color:#acd0c0;
+	float:left;
+}
+
+.block-driving
+{
+	padding-top:3px;
+	padding-bottom:3px;
+	background-color:#8eba43;
+	float:left;
+}
+
+.block-sleep
+{
+	padding-top:3px;
+	padding-bottom:3px;
+	background-color:#5ea8cc;
+	float:left;
+}
+
+.block-time-left
+{
+	padding-top:3px;
+	padding-bottom:3px;
+	background-color:#b7b8b6;
+	color:#b7b8b6;
+	float:left;
+}
+#times
+{
+	color:white;
+	text-align:right;
+}
+
+.day-picker-container 
+{
+	margin:15px;
+	font-size:2em;
+}
+.user-info-container
+{
+	margin:15px;
+	font-size:20px;
+}
+
+#date-container, #user-name, #current-time
+{
+	padding:5px;
+	padding-left:6px;
+	padding-right:6px;
+	margin:5px;
+	text-align:center;
+	height:100%;
+	width:100%;
+}
+
+#user-info-button
+{
+	background-color:#ffc107;
+}
+
+.modal
+{
+	color:black;
+}
+
+label
+{
+	padding-top:10px;
+}
+
+span
+{
+	padding:2px;
+}

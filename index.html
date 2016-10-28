@@ -1,0 +1,171 @@
+<!--
+le bugs: time format in bar; some minutes< 10 does not show 0 @ begining
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title>Trucking ELD</title>
+		<meta charset="utf-8">
+		<meta name="author" content="Alan Cleetus">
+
+		<!--bootstrap stuff-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		
+		<!--my links-->
+		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+		<link rel="stylesheet" href="css/style.css">
+		<script rel="text/javascript" src= "js/myFunction.js"></script>
+		<script rel="text/javascript">
+			
+			//if first state is off duty then the time should be 0 since driver is by default in off-duty
+			var arr=
+				{
+				'0:00':'off-duty',
+				'1:08':'driving',
+				'2:37':'sleep',
+				'3:58':'off-duty',
+				'5:00':'on-duty',
+				'7:15':'driving'
+
+				}
+			setInterval(function(){myFunction(arr)},100000);//updates graph every minute
+
+			window.onload = function(){myFunction(arr)};
+			//window.onload= setDate;
+			
+			function buttonClicked(state)
+			{
+				//create new state
+				var d = new Date();
+				var mins=d.getMinutes();
+				
+				if(d.getMinutes()<10)
+					mins="0"+mins;
+					
+				var key = d.getHours()+":"+mins;
+				console.log("new:"+key+":"+state);
+				arr[key]=state;
+				
+				//update graph and state
+				myFunction(arr);
+			}
+		</script>
+		
+<body>
+
+	<!-- holds everything in the webpage-->
+	<div class="container-fluid" id="main-container">
+		<p>Currently: <span id ="current-state"><span></p>
+		<!-- holds all the top buttons-->
+		<div class="container-fluid" id="button-container">
+		
+			<!-- puts buttons in rows. uses bootstrap grid layout-->
+			<div class="row">
+				
+				<div class=" col-lg-3 col-md-3 col-sm-6 col-xs-6">
+					<button class="status-button status-off-duty" value="off duty" onclick="buttonClicked('off-duty')">off duty</button>
+				</div>
+				<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6">
+					<button class="status-button status-on-duty" value = "on duty" onclick="buttonClicked('on-duty')">on duty</button>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+					<button class="status-button status-sleep" value="sleep" onclick="buttonClicked('sleep')">sleep</button>
+				</div>
+				<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6">
+					<button class="status-button status-driving" value="driving" onclick="buttonClicked('driving')">driving</button>
+				</div>
+				
+			</div><!--end row-->
+			
+		</div><!--end button-container-->
+		
+		<div class="graph-container container-fluid">
+			<div id ="graph-container">
+				<p>Hours</p>
+				<div id = "times"></div>
+				<div id = "myGraph"></div>
+				<!-- sometimes work, sometimes dosent worlk, too tired to think abt why this dosent work been up for ~25hrs
+				-->
+				
+				<p style="text-align:left;">Total Time Spent in Each State:</p>
+				<div id = "totalHours"></div>
+			</div>
+		</div><!--end graph container-->
+		
+		<div class="day-picker-container">
+			<div class="row">
+				<div class="col-lg-3 offset-lg-2 col-md-3 col-sm-3 col-xs-3">
+					<button>< prev</button>
+				</div>
+				
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div id ="date-container"></div>
+				</div>
+				
+				<div class="col-lg-3  col-md-3 col-sm-3 col-xs-3" >
+					<button>next ></button>
+				</div>
+			</div>
+		</div><!--end day container-->
+		
+		<div class="user-info-container">
+			<div class="row">
+				<div class="col-lg-3 offset-lg-2 col-md-3 col-sm-3 col-xs-3">
+					<button id = "user-info-button" data-toggle="modal" data-target="#userInfoModal">user info</button>
+				</div>
+				
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<p id="user-name" >John Doe</p>
+				</div>
+				
+				<div class="col-lg-3  col-md-3 col-sm-3 col-xs-3" >
+					<p id= "current-time"></p>
+				</div>
+			</div>
+		</div><!--end day container-->
+
+	</div><!--end main-container-->
+	
+	<!--Modal-->
+	<div class="modal fade" id="userInfoModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" style="text-align:right;">&times;</button>
+					<h4 class="modal-title">User Information</h4>
+				</div>
+			
+				<div class="modal-body">
+					<label>Name</label>
+					<input type="text" class="form-control" value="John Doe" >
+					
+					<label>Id</label>
+					<input type="text" class="form-control" value="0123456789" >
+					
+					<label>Carrier Name</label>
+					<input type="text" class="form-control" value="ABC Trucking" >
+					
+					<label>Commercial Drivers License</label>
+					<input type="text" class="form-control" value="1654156564" >
+					
+					<label>State</label>
+					<input type="text" class="form-control" value="CA" >
+					
+					<label>Age</label>
+					<input type="text" class="form-control" value="34" >
+				</div>
+			
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<body>
+</html>
